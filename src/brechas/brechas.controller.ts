@@ -38,6 +38,6 @@ export class BrechasController {
   @ApiOperation({ summary: 'Lista todos os mariners' })
   @ApiResponse({ status: 200, description: 'Retorna a lista de mariners' })
   listaMariner() {
-    return this.brechasService.getMarinersWithPoints();
+    return this.brechasService.listaMariner();
   }
 }
