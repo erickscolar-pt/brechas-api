@@ -33,4 +33,11 @@ export class BrechasController {
   findAll() {
     return this.brechasService.getMarinersWithPoints();
   }
+
+  @Get("mariners")
+  @ApiOperation({ summary: 'Lista todos os mariners' })
+  @ApiResponse({ status: 200, description: 'Retorna a lista de mariners' })
+  listaMariner() {
+    return this.brechasService.getMarinersWithPoints();
+  }
 }

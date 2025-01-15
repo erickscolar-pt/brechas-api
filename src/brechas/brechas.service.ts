@@ -29,25 +29,6 @@ export class BrechasService {
     });
   }
 
-  async findAll() {
-    // Realiza a consulta na tabela brasileirao, calcula os pontos e ordena
-    const brasileirao = await this.prisma.brasileirao.findMany({
-      include: {
-        Mariners: true, // Inclui dados do mariner relacionado
-      },
-    });
-
-    // Calcula os pontos e ordena do maior para o menor
-    const result = brasileirao
-      .map((record) => ({
-        ...record,
-        pontos: record.vitoria * 3 + record.empate * 1, // Calcula os pontos
-      }))
-      .sort((a, b) => b.pontos - a.pontos); // Ordena do maior para o menor
-
-    return result;
-  }
-
   async getMarinersWithPoints() {
     const brechas = await this.prisma.brasileirao.findMany({
       select: {
@@ -94,6 +75,10 @@ export class BrechasService {
 
     // Converter o mapa para um array
     return Array.from(marinersMap.values()).sort((a, b) => b.total_pontos - a.total_pontos); // Ordenar por total de pontos
+  }
+
+  async listaMariner(){
+    return await this.prisma.mariners.findMany();
   }
 
 }
