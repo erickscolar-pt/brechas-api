@@ -1,0 +1,29 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL") // Substitua pelo URL do seu banco PostgreSQL
+}
+
+model Mariners {
+  id          Int           @id @default(autoincrement())
+  nome        String
+  sobrenome   String
+  Brasileirao Brasileirao[] // Relacionamento 1:N com Brasileirao
+
+  created_at DateTime? @default(now())
+  updated_at DateTime? @default(now())
+}
+
+model Brasileirao {
+  id          Int       @id @default(autoincrement())
+  vitoria     Int       @default(0)
+  empate      Int       @default(0)
+  data        DateTime  
+  id_mariners Int
+  frase       String
+
+  Mariners Mariners @relation(fields: [id_mariners], references: [id])
+}
